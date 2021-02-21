@@ -1,38 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
 .App {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+* {
+  font-family: 'Press Start 2P', cursive;
+  background-color: #202223;
+  color: whitesmoke;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.App {
+  text-align: center;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+
+/* Header stuff-- Beg */
+.HeaderDiv > h1 > span {
+  color: rgb(172,21,21)
+  ;
+}
+
+.HeaderDiv > h1 {
+  color: rgb(23,91,146);
+}
+.HeaderDiv > p {
+  color: whitesmoke;
+  opacity: 0.7;
+}
+
+/* Header stuff-- End */
+
+/* Footer stuff-- Beg */
+
+.FooterDiv {
+  display: flex;
+  justify-content: space-around;
+  min-height: 40px;
+}
+.FooterDiv > div > div {
+  display: flex;
+}
+
+.FooterDiv > div > div > a {
+  align-items: center;
+  justify-content: space-evenly;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.FooterDiv > div > div > a > .icon {
+  padding: 8px 4px 8px 4px;
+  font-size: 1.5rem;
+}
+
+.FooterDiv > div > div > a > .icon > path {
+  transition: 1s;
+}
+.FooterDiv > div > div > a > .icon:hover > path {
+  opacity: 0.5;
+  transform: scale(1.2);
+}
+
+.FooterDiv > div > div > a > .ICONFacebook > path {
+  color:rgb(66,103,178);
+}
+
+.FooterDiv > div > div > a > .ICONTwitter > path {
+  color:rgb(28,156,234);
+}
+
+.FooterDiv > div > div > a > .ICONGithub > path {
+  color:rgb(91,96,110);
+}
+
+.FooterDiv > div > div > a > .ICONYoutube > path {
+  color:rgb(255,0,0);
+}
+
+.FooterDiv > div > div > a > .ICONJs > path {
+  color:rgb(231,186,56);
+}
+
+/* Footer stuff-- End */
+
+
+/* CV Builder stuff-- Beg */
+
+.CV-Builder {
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+.CV-Builder > form > button {
+  width: 140px;
+  height: 40px;
+  font-size: 1.1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  outline: none;
+  box-shadow: none;
+  border-style: none;
+  color: rgb(32,34,35);
+  background-color: rgb(231,186,56);
+  transition: all .2s ease-in-out; 
+}
+.CV-Builder > form > button:focus {
+   outline:0;
+}
+
+.CV-Builder > form > button:hover {
+  backface-visibility: hidden;
+  transform: scale(1.1);
+}
+
+
+.CV-Builder > form > div > h3{
+  color: rgb(231,186,56);
+}
+
+.DataInputs {
+  min-height: 100px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: space-around;
 }
 
-.App-link {
-  color: #61dafb;
+.DataInputs > label >input {
+  width: 50%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+/* CV Builder stuff-- End */
+
