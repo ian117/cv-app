@@ -1,10 +1,47 @@
 import React, { useState, useEffect} from 'react';
+import uniqid from 'uniqid';
 
 const CvBuilder = () => {
     const [ isEdit, setIsEdit] = useState(false);
     const [ name, setName] = useState();
     const [ email, setEmail] = useState();
     const [ phone, setPhone] = useState();
+    //Const para los ADD skills & exp
+    const [educationIds, setEducationIds] = useState([]);
+	const [experienceIds, setExperienceIds] = useState([]);
+
+    //HandleClick para hacer el seteo del ID
+    const handleClick = (type) => {
+		if (type === 'experienceIds') {
+			setExperienceIds((prevExpIds) => [...prevExpIds, uniqid()]);
+		} else {
+			setEducationIds((prevEduIds) => [...prevEduIds, uniqid()]);
+		}
+	};
+
+    //Handler para hacer el Delete
+    const handleDelete = (type, id) => {
+		if (type === 'experienceIds') {
+			setExperienceIds((prevExpIds) => {
+				let newList = prevExpIds.filter((key) => key !== id);
+				return newList;
+			});
+		} else {
+			setEducationIds((prevEduIds) => {
+				let newList = prevEduIds.filter((key) => key !== id);
+				return newList;
+			});
+		}
+	};
+
+
+    //Se hace el seteo de los componentes que se añaden constantemente
+    const skillsComponents = educationIds.map((id) => (
+		<p>heey</p>
+	));
+	const expComponents = experienceIds.map((id) => (
+		<p>heey</p>
+	));
 
 
    return  ( 
@@ -33,13 +70,15 @@ const CvBuilder = () => {
            <div>
                 <h3>Skills</h3>
                 <p>Add "Skills" component</p>
-                <button type="button" className="btnForAdd">+ Skill</button>
+                {skillsComponents}
+                <button onClick={() => handleClick('educationIds')} type="button" className="btnForAdd">+ Skill</button>
 
            </div>
            <div>
                 <h3>Working Experience</h3>
                 <p>Add "Working Experience" component</p>
-                <button type="button" className="btnForAdd">+ Experience</button>
+                {expComponents}
+                <button onClick={() => handleClick('experienceIds')} type="button" className="btnForAdd">+ Experience</button>
 
            </div>
         
