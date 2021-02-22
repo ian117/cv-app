@@ -33,11 +33,13 @@ const CvBuilder = () => {
            <div>
                 <h3>Skills</h3>
                 <p>Add "Skills" component</p>
+                <button type="button" className="btnForAdd">+ Skill</button>
 
            </div>
            <div>
                 <h3>Working Experience</h3>
                 <p>Add "Working Experience" component</p>
+                <button type="button" className="btnForAdd">+ Experience</button>
 
            </div>
         
