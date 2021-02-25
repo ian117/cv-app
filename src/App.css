@@ -168,6 +168,10 @@
   outline:0;
 }
 
+.pGreen {
+  color: green;
+}
+
 .btnForAdd:hover {
   backface-visibility: hidden;
   transform: scale(1.1);

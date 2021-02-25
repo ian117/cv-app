@@ -74,7 +74,7 @@ const CvBuilder = () => {
 
                 {skillsFields.map((item, index) => (
 
-                        <div key={item.id}>
+                        <div key={item.id} style={{marginTop:"50px"}}>
                             <p>Skill </p>
                             <input
                                 className="CompInput"
@@ -83,7 +83,7 @@ const CvBuilder = () => {
                                 ref={register()}
                                 defaultValue={item.skill}
                             />
-                            <p>In which year learned this skill</p>
+                            <p className="pGreen">In which year learned this skill</p>
                             <Controller as={<input />}
                                 className="CompInput"
                                 placeholder="Date"
@@ -91,7 +91,7 @@ const CvBuilder = () => {
                                 control={control}
                                 defaultValue={item.date} // make sure to set up defaultValue
                                 />
-                                <button style={{display: "block", margin: "auto", marginTop: "15px"}} type="button" onClick={() => skillsRemove(index)}>Remove Skill</button>
+                                <button style={{display: "block", margin: "auto", marginTop: "15px", color:"rebeccapurple"}} type="button" onClick={() => skillsRemove(index)}>Remove Skill</button>
                         </div>
 
                 ))}
@@ -111,8 +111,8 @@ const CvBuilder = () => {
 
                 {experienceFields.map((item, index) => (
 
-                    <div key={item.id}>
-                        <p>Where your work</p>
+                    <div key={item.id} style={{marginTop:"50px"}}>
+                        <p>Worked at</p>
                         <input
                             className="CompInput"
                             placeholder="Place of work"
@@ -120,7 +120,7 @@ const CvBuilder = () => {
                             ref={register()}
                             defaultValue={item.exp}
                         />
-                        <p>How many years spend in that position</p>
+                        <p className="pGreen">How many years spend in that position</p>
                         <Controller as={<input />}
                             className="CompInput"
                             placeholder="Years"
@@ -128,7 +128,7 @@ const CvBuilder = () => {
                             control={control}
                             defaultValue={item.years} // make sure to set up defaultValue
                             />
-                            <button style={{display: "block", margin: "auto", marginTop: "15px"}} type="button" onClick={() => experienceRemove(index)}>Remove Experience</button>
+                            <button style={{display: "block", margin: "auto", marginTop: "15px", color:"rebeccapurple"}} type="button" onClick={() => experienceRemove(index)}>Remove Experience</button>
                     </div>
 
                     ))}
