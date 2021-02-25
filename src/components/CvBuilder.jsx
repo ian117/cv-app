@@ -1,87 +1,147 @@
 import React, { useState, useEffect} from 'react';
-import uniqid from 'uniqid';
+import { useForm, useFieldArray, useWatch, Controller  } from 'react-hook-form';
+
 
 const CvBuilder = () => {
-    const [ isEdit, setIsEdit] = useState(false);
-    const [ name, setName] = useState();
-    const [ email, setEmail] = useState();
-    const [ phone, setPhone] = useState();
-    //Const para los ADD skills & exp
-    const [educationIds, setEducationIds] = useState([]);
-	const [experienceIds, setExperienceIds] = useState([]);
 
-    //HandleClick para hacer el seteo del ID
-    const handleClick = (type) => {
-		if (type === 'experienceIds') {
-			setExperienceIds((prevExpIds) => [...prevExpIds, uniqid()]);
-		} else {
-			setEducationIds((prevEduIds) => [...prevEduIds, uniqid()]);
-		}
-	};
+    //React UseForm ===>
+    const { register, errors, handleSubmit, control } = useForm();
 
-    //Handler para hacer el Delete
-    const handleDelete = (type, id) => {
-		if (type === 'experienceIds') {
-			setExperienceIds((prevExpIds) => {
-				let newList = prevExpIds.filter((key) => key !== id);
-				return newList;
-			});
-		} else {
-			setEducationIds((prevEduIds) => {
-				let newList = prevEduIds.filter((key) => key !== id);
-				return newList;
-			});
-		}
-	};
+    //Array for Skills
+    const { fields: skillsFields, append: skillsAppend, remove: skillsRemove} = useFieldArray({
+        control,
+        name: 'skills'
+    });
 
+    //Array for Experience
+    const { fields: experienceFields, append: experienceAppend, remove: experienceRemove} = useFieldArray({
+        control,
+        name: 'experience'
+    });
 
-    //Se hace el seteo de los componentes que se añaden constantemente
-    const skillsComponents = educationIds.map((id) => (
-		<p>heey</p>
-	));
-	const expComponents = experienceIds.map((id) => (
-		<p>heey</p>
-	));
-
+    //OnSubmit CallBack ==>
+        const onSubmitForm = (data, e) => {
+            console.log("%cHey bby, i want to know","color:green; font-size:1.3rem")
+            console.log(data)
+            e.target.reset()
+        }
 
    return  ( 
     
     <div className="CV-Builder">
-       <form>
+       <form onSubmit={handleSubmit(onSubmitForm)}>
            <div>
                 <h3>General Data</h3>
                 <div className="DataInputs">
 
                     <label>
                         Name:
-                        <input type="text"/>
+                        <input ref={register({
+                            required: {value: true, message: 'Name Required'}
+                        })} name="name" type="text"/>
                     </label>
+                   
+                        <p style={{background:"white", color:"red",  width: "35%",  margin: "auto"}}>
+                           {errors?.name?.message}
+                        </p>
+
                     <label>
                         Email:
-                        <input type="email"/>
+                        <input ref={register({
+                            required: {value: true, message: 'Email Required'}
+                        })} name="email" type="email"/>
                     </label>
+
+                    <p style={{background:"white", color:"red",  width: "35%",  margin: "auto"}}>
+                           {errors?.email?.message}
+                        </p>
+
                     <label>
                         Phone:
-                        <input type="number"/>
+                        <input ref={register({
+                            required: {value: true, message: 'Phone Required'}
+                        })} name="phone" type="number"/>
                     </label>
+
+                    <p style={{background:"white", color:"red",  width: "35%",  margin: "auto"}}>
+                           {errors?.phone?.message}
+                        </p>
 
                 </div>
            </div>
            <div>
                 <h3>Skills</h3>
-                <p>Add "Skills" component</p>
-                {skillsComponents}
-                <button onClick={() => handleClick('educationIds')} type="button" className="btnForAdd">+ Skill</button>
+
+                {skillsFields.map((item, index) => (
+
+                        <div key={item.id}>
+                            <p>Skill </p>
+                            <input
+                                className="CompInput"
+                                placeholder="Skill"
+                                name={`skills[${index}].skill`}
+                                ref={register()}
+                                defaultValue={item.skill}
+                            />
+                            <p>In which year learned this skill</p>
+                            <Controller as={<input />}
+                                className="CompInput"
+                                placeholder="Date"
+                                name={`skills[${index}].date`}
+                                control={control}
+                                defaultValue={item.date} // make sure to set up defaultValue
+                                />
+                                <button style={{display: "block", margin: "auto", marginTop: "15px"}} type="button" onClick={() => skillsRemove(index)}>Remove Skill</button>
+                        </div>
+
+                ))}
+                <button
+                    className="btnForAdd"
+                    type="button"
+                    onClick={() => skillsAppend({ skill: "", date: "" })}
+                >
+                    + Skill
+                </button>
 
            </div>
+
            <div>
                 <h3>Working Experience</h3>
-                <p>Add "Working Experience" component</p>
-                {expComponents}
-                <button onClick={() => handleClick('experienceIds')} type="button" className="btnForAdd">+ Experience</button>
+
+
+                {experienceFields.map((item, index) => (
+
+                    <div key={item.id}>
+                        <p>Where your work</p>
+                        <input
+                            className="CompInput"
+                            placeholder="Place of work"
+                            name={`experience[${index}].exp`}
+                            ref={register()}
+                            defaultValue={item.exp}
+                        />
+                        <p>How many years spend in that position</p>
+                        <Controller as={<input />}
+                            className="CompInput"
+                            placeholder="Years"
+                            name={`experience[${index}].years`}
+                            control={control}
+                            defaultValue={item.years} // make sure to set up defaultValue
+                            />
+                            <button style={{display: "block", margin: "auto", marginTop: "15px"}} type="button" onClick={() => experienceRemove(index)}>Remove Experience</button>
+                    </div>
+
+                    ))}
+                <button
+                    className="btnForAdd"
+                    type="button"
+                    onClick={() => experienceAppend({ exp: "", years: "" })}
+                    >
+                    + Experience
+                 </button>
 
            </div>
-        
+       
             <button> Make CV</button>
        </form>
     </div>
